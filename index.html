@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出発口</title>
+  </head>
+
+  <body>
+    <button class="Button JsGetToken">トークン取得</button>
+    <button class="Button JsLogin">送信（要トークン）</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    document.querySelector('.JsGetToken').addEventListener('click', () => {
+      axios({
+        method: 'get',
+        url: '/get-token.php',
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+      })
+        .then((response) => {
+          alert(response.data);
+        });
+    });
+
+    document.querySelector('.JsLogin').addEventListener('click', () => {
+      axios({
+        method: 'post',
+        url: '/need-token.php',
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        withCredentials: true,
+      })
+        .then((response) => {
+          alert(response.data);
+        });
+    });
+    </script>
+  </body>
+</html>
